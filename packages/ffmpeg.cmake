@@ -23,6 +23,7 @@ ExternalProject_Add(ffmpeg
         shaderc
         dav1d
         mbedtls
+        libsrt
     GIT_REPOSITORY https://github.com/FFmpeg/FFmpeg.git
     SOURCE_DIR ${SOURCE_LOCATION}
     GIT_TAG ea3d24bbe3c58b171e55fe2151fc7ffaca3ab3d2
@@ -102,6 +103,7 @@ ExternalProject_Add(ffmpeg
         --enable-libshaderc
         --enable-libfribidi
         --enable-libfreetype
+        --enable-libsrt
 
         --enable-avutil
         --enable-avcodec
@@ -257,6 +259,7 @@ ExternalProject_Add(ffmpeg
         --enable-parser=tak
         --enable-parser=vorbis
         --enable-parser=dca
+        --enable-parser=dvbsub
 
         --enable-filter=overlay
         --enable-filter=equalizer
@@ -282,6 +285,7 @@ ExternalProject_Add(ffmpeg
         --enable-protocol=tcp
         --enable-protocol=tls
         --enable-protocol=srt
+        --enable-protocol=libsrt
 
         --enable-encoder=mjpeg
         --enable-encoder=ljpeg
