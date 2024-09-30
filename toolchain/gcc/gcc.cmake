@@ -1,9 +1,9 @@
 ExternalProject_Add(gcc
     DEPENDS
         mingw-w64-headers
-    URL https://mirrorservice.org/sites/sourceware.org/pub/gcc/snapshots/13-20231111/gcc-13-20231111.tar.xz
-    # https://mirrorservice.org/sites/sourceware.org/pub/gcc/snapshots/12-20221217/sha512.sum
-    URL_HASH SHA512=6f62981040894fdc98fff57295608092b917fe909cd67477c9ffc81197e5780ebabe1fbb4113e792ea441e0adb79fec5f802cda807632945c36ea295d623f19f
+    URL https://mirrorservice.org/sites/sourceware.org/pub/gcc/snapshots/14-20240914/gcc-14-20240914.tar.xz
+    # https://mirrorservice.org/sites/sourceware.org/pub/gcc/snapshots/13-20240309/sha512.sum
+    URL_HASH SHA512=9f63ebf77a1fc18fe71681e1f97d667c077c87342bbf892510796cb6c0988c4cc2d99a5f6cbb46a10d4280012cc519604e1331648e2bba9449b6d5be580a1bf8
     DOWNLOAD_DIR ${SOURCE_LOCATION}
     CONFIGURE_COMMAND <SOURCE_DIR>/configure
         --target=${TARGET_ARCH}
@@ -35,6 +35,7 @@ ExternalProject_Add_Step(gcc final
         winpthreads
         gendef
         rustup
+        cppwinrt
     COMMAND ${MAKE}
     COMMAND ${MAKE} install-strip
     WORKING_DIRECTORY <BINARY_DIR>
