@@ -6,13 +6,22 @@ ExternalProject_Add(mpv
         lcms2
         libarchive
         libass
+        libdvdnav
+        libdvdread
+        libiconv
         libjpeg
         libpng
+        luajit
+        rubberband
         uchardet
+        openal-soft
         mujs
+        vulkan
         shaderc
         libplacebo
         spirv-cross
+        vapoursynth
+        libsdl2
     GIT_REPOSITORY https://github.com/mpv-player/mpv.git
     SOURCE_DIR ${SOURCE_LOCATION}
     GIT_CLONE_FLAGS "--filter=tree:0"
@@ -28,20 +37,24 @@ ExternalProject_Add(mpv
         -Doptimization=3
         -Db_lto=true
         ${mpv_lto_mode}
-        -Dgpl=false
-        -Db_lto=true
-        -Db_ndebug=true
         -Dlibmpv=true
         -Dpdf-build=enabled
-        -Dlua=disabled
+        -Dlua=enabled
         -Djavascript=enabled
+        -Dsdl2=enabled
+        -Dlibarchive=enabled
+        -Dlibbluray=enabled
+        -Ddvdnav=enabled
         -Duchardet=enabled
+        -Drubberband=enabled
         -Dlcms2=enabled
-        -Dopenal=disabled
+        -Dopenal=enabled
         -Dspirv-cross=enabled
         -Dvulkan=enabled
-        -Degl-angle=enabled
-    BUILD_COMMAND ${EXEC} LTO_JOB=1 ninja -C <BINARY_DIR>
+        -Dvapoursynth=enabled
+        ${mpv_gl}
+        -Dc_args='-Wno-error=int-conversion'
+    BUILD_COMMAND ${EXEC} LTO_JOB=1 PDB=1 ninja -C <BINARY_DIR>
     INSTALL_COMMAND ""
     LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
 )
@@ -49,9 +62,6 @@ ExternalProject_Add(mpv
 ExternalProject_Add_Step(mpv strip-binary
     DEPENDEES build
     ${mpv_add_debuglink}
-    COMMAND ${EXEC} ${TARGET_ARCH}-strip -s <BINARY_DIR>/mpv.exe
-    COMMAND ${EXEC} ${TARGET_ARCH}-strip -s <BINARY_DIR>/mpv.com
-    COMMAND ${EXEC} ${TARGET_ARCH}-strip -s <BINARY_DIR>/libmpv-2.dll
     COMMENT "Stripping mpv binaries"
 )
 
