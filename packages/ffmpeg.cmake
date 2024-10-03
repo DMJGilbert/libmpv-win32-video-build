@@ -64,7 +64,6 @@ ExternalProject_Add(ffmpeg
         --enable-amf
         --enable-cuda
         --enable-nvdec
-        --enable-nvenc
         --enable-cuvid
         --enable-dxva2
         --enable-libmfx
